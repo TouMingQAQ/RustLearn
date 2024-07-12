@@ -12,4 +12,24 @@ fn main() {
     let str1 = String::from("Hello world");
     let str2 = str1;//移交所有权
     // println!("{}",str1)//error 没有所有权
+    let str3 = str2.clone();//深拷贝
+    println!("{str2}");
+    get_Length(str2);//传入函数后，在函数结束时就销毁了
+    // println!("{str2}");//Error
+    println!("{}",first_word("Hello World"));
+}
+fn get_Length(str:String)->usize
+{
+    // return str.len();
+    str.len()//不输入;时，自动return最后一个函数的值
+}
+fn first_word(s:&str)->&str{
+    let bytes = s.as_bytes();
+    for (i,&item) in bytes.iter().enumerate(){
+        if(item == b' ')
+        {
+            return &s[0..i];
+        }
+    }
+    &s[..]
 }
